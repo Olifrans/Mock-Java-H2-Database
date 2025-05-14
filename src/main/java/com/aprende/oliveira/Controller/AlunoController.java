@@ -15,7 +15,7 @@ public class AlunoController {
     public AlunoController(AlunoService service) {
         this.service = service;
     }
-    
+
     @GetMapping
     public List<Aluno> buscarAlunos(){
         return service.listaDeAluno();
@@ -26,16 +26,27 @@ public class AlunoController {
         return service.criarAluno(novoAluno);
     }
 
-    @DeleteMapping("/id")
+    @PutMapping("/{id}")
+    public Aluno atulizaAluno(@PathVariable Long id
+            ,@RequestBody Aluno alteraAluno){
+
+        Aluno atualizado = service.buscarAlunoId(id);
+        if (atualizado == null) return null;
+
+        atualizado.setNome(alteraAluno.getNome());
+        atualizado.setEmail(alteraAluno.getEmail());
+        atualizado.setTelefone(alteraAluno.getTelefone());
+
+        return service.criarAluno(atualizado);
+    }
+
+    @DeleteMapping("/{id}")
     public void excluirAluno(@PathVariable Long id){
         service.deletarAluno(id);
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public Aluno buscaAlunoPorID(@PathVariable Long id){
         return service.buscarAlunoId(id);
     }
-
-
-
 }
