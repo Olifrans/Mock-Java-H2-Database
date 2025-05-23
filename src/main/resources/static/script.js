@@ -1,3 +1,17 @@
+
+// Primeira NavBar
+import { Collapse, initMDB } from "mdb-ui-kit";
+initMDB({ Collapse });
+
+
+
+// Segunda NavBar
+import { Dropdown, Collapse, initMDB } from "mdb-ui-kit";
+initMDB({ Dropdown, Collapse });
+
+
+
+// Chamada da API Alunor
 document.addEventListener('DOMContentLoaded', () => {
   fetch('http://localhost:8080/alunos')
     .then(response => response.json())
@@ -19,3 +33,4 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Erro ao carregar a lista de alunos.');
     });
 });
+
